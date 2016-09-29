@@ -26,6 +26,6 @@ class User extends Authenticatable
     }
 
     public function workouts(){
-    	return $this->hasMany('App\Workout', 'user_id');
+    	return $this->hasMany('App\Workout', 'User_id');
     }
 }

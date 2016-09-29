@@ -2,6 +2,16 @@
 
 @section('title') Assign Workout @stop
 
+@section('head')
+<script>
+$(document).ready(function() {
+    $("#basicDataTable").DataTable({
+        "order": [],
+    });
+});
+</script>
+@stop
+
 @section('body')
 <div class="container">
 	<div class="row">
@@ -19,11 +29,13 @@
 			           </tr>
 			    </thead>
 			    <tbody>
+			    <!--se recorre la variable que viene del controlador y se imprimen los datos-->
 			     @foreach($usuarios as $usuario)
 			           <tr class="odd gradeX">
 			             <td>{{$usuario->username}}</td>
 			             <td>{{$usuario->email}}</td>
 			             <td>{{$usuario->rol->Rol}}</td>
+			             <!--links a las rutas definidad con el parametro de id-->
 			             <td><a href="profile/user/{{base64_encode($usuario->id)}}" class="btn btn-success">Profile</a>
 			             <a href="edit/user/{{base64_encode($usuario->id)}}" class="btn btn-primary">Update</a>
 			             <a href="delete/user/{{base64_encode($usuario->id)}}" class="btn btn-danger">Delete</a>
@@ -39,19 +51,4 @@
 	</div>
 </div>
 
-{{--<div class="container">
-	<div class="row">
-		{!!Form::open(['url' => 'create/event','files' => true, 'method' => 'POST'])!!}
-			<div class="form-group">
-				<label>Clasificación</label>
-				{!!Form::text('Clasificacion_Arma', null, ['class' => 'form-control'])!!}	
-			</div>
-
-			<div class="form-group">
-				<label>Descripción</label>
-				{!!Form::text('Descripcion_Arma', null, ['class' => 'form-control'])!!}	
-			</div>
-		{!!Form::close()!!}		
-	</div>
-</div>--}}
 @stop

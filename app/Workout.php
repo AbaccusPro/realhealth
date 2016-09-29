@@ -11,6 +11,7 @@ class Workout extends Model
 
     protected $fillable = ['Current_date','Start_time','End_time','Scale_weight','Body_fat','Fitness_goal','Sleep_hrs','Name_workout','user_id'];
 
+    //relaciones
     public function cardios(){
     	return $this->hasMany('App\Cardio', 'Workout_id');
     }

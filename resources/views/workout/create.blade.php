@@ -8,18 +8,19 @@
 $(document).on('ready', function(){
 	$('#cardio').on('click', function(e){
 	e.preventDefault();
-	// get the last DIV which ID starts with ^= "klon"
+	// get the last DIV which ID starts with ^= "car"
 	var div = $('div[id^="car"]:last');
 
-	// Read the Number from that DIV's ID (i.e: 3 from "klon3")
+	// Read the Number from that DIV's ID (i.e: 3 from "car3")
 	// And increment that number by 1
 	var num = parseInt(div.prop("id").match(/\d+/g), 10) +1;
 
-	// Clone it and assign the new ID (i.e: from num 4 to ID "klon4")
+	// Clone it and assign the new ID (i.e: from num 4 to ID "car4")
 	var klon = div.clone().prop('id', 'car'+num ).insertAfter(div).find("input[type='text']").val("");
-	$('div[id^="car"]:last label').remove();
+	$('div[id^="car"]:last label').remove(); //qui removemos las label para que no vuelvan a aparecer
 	});
 
+	// la logica anterior se hace para todos los campos dinamicos
 	$('#training').on('click', function(e){
 	e.preventDefault();
 	var div = $('div[id^="tra"]:last');
@@ -36,6 +37,7 @@ $(document).on('ready', function(){
 	$('div[id^="diet"]:last label').remove();
 	});
 
+	//con esta funcion evitamos que se borre el campo, es decir, al menos debe de haber un una linea de cada campo
 	$('#-diet').on('click', function(e){
 		e.preventDefault();
 		if($('div[id^="diet"]:last').attr('id') != 'diet1')	$('div[id^="diet"]:last').remove();
@@ -52,6 +54,7 @@ $(document).on('ready', function(){
 	});
 
 	$('#boton').on('click', function(e){
+		//aqui se asignan las variables que se van a mandar con el post y el metodo Ajax de jquery
 		e.preventDefault();
 		var Excercise = valores($("input[name^='Excercise_C']"));
 		var Measure = valores($("input[name^='Measure']"));
@@ -77,12 +80,15 @@ $(document).on('ready', function(){
         console.log(Excercise_T);
 	    
 		$.ajax({
-		   	type: "POST",
-		   	url: "{{ url('assign/workout', $usuario->id) }}",
-		   	data: {values, Excercise, Measure, Notes, Excercise_T, Weight, Sets, Reps, Rest, Notes_T, Meal, Fods, Calories},
-		   	headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+			//metodo Ajax de jquery
+		   	type: "POST", //peticion post
+		   	url: "{{ url('assign/workout', $usuario->id) }}", //url a la que se envian los datos
+		   	data: {values, Excercise, Measure, Notes, Excercise_T, Weight, Sets, Reps, Rest, Notes_T, Meal, Fods, Calories}, //datos que se envian
+		   	headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')}, //el token de seguridad de laravel
 		   	success: function() {
+		   		//si el guardado es correcto y la peticion sale bien se ejecuta este codigo
 		   		alert('datos guardados correctamente');
+		   		//con esta funcion se resetea el forulario
 		   		$('#myForm').each (function(){
 		   			this.reset();
 				});
@@ -93,6 +99,7 @@ $(document).on('ready', function(){
 </script>
 <script>
 	//functions
+	//con esta funcion obtenemos todos los campos que fueron creados dinamicamente... dependiendo el selector que ocupemos
 	function valores(input_array){
 		/* var values2 = $("input[name^='Excercise_T']")
               .map(function(){return $(this).val();}).get();*/

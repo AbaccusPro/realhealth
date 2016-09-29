@@ -30,8 +30,8 @@
 @include('forms/Menu')	
 	
   <script>
-  $("#alerta").alert();
-  window.setTimeout(function() { $("#alerta").alert('close'); }, 3000);
+  /*$("#alerta").alert();
+  window.setTimeout(function() { $("#alerta").alert('close'); }, 3000);*/
   </script>
 
 	@include('forms.Alerta')
@@ -1562,5 +1562,8 @@
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="{{asset('styles/assets/js/scripts.js')}}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css">
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
 </body>
 </html>
