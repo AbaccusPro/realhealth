@@ -115,4 +115,12 @@ class WorkoutController extends Controller
         $workout = Workout::find($id);
         return view('workout.details', compact('workout'));
     }
+
+    public function detailsToPdf($Id){
+        $id = base64_decode($Id);
+        $workout = Workout::find($id);
+        $bol = true;
+        $pdf = \PDF::loadView('workout.pdf.details', compact('workout', 'bol'));
+        return $pdf->stream('workout.report');
+    }
 }

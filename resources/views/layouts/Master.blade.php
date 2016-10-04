@@ -27,21 +27,20 @@
     <link href="{{asset('styles/assets/plugins/switchery/css/switchery.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{asset('styles/pages/css/pages-icons.css')}}" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="{{asset('styles/pages/css/pages.css')}}" rel="stylesheet" type="text/css" />
-@include('forms/Menu')	
 	
   <script>
   /*$("#alerta").alert();
   window.setTimeout(function() { $("#alerta").alert('close'); }, 3000);*/
   </script>
 
-	@include('forms.Alerta')
-	@include('forms.Error')
-
 	@yield('head')
 	
 </head>
 <body class="fixed-header ">
+@if(!isset($bol))
 	@include('forms.Menu')
+  @include('forms.Alerta')
+  @include('forms.Error')
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
       <!-- START HEADER -->
@@ -266,6 +265,7 @@
           <div class="container-fluid container-fixed-lg">
             <!-- BEGIN PlACE PAGE CONTENT HERE -->
             @include('forms.Error')
+            @endif
             @yield('body')
             <!-- END PLACE PAGE CONTENT HERE -->
           </div>

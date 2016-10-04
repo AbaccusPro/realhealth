@@ -38,4 +38,5 @@ Route::get('assign/workout/{id}', 'WorkoutController@create');
 Route::post('assign/workout/{id}', 'WorkoutController@store');
 Route::get('view/workout/{id}', 'WorkoutController@show');
 Route::get('details/workout/{id}', 'WorkoutController@details');
+Route::get('pdf/workout/{id}', 'WorkoutController@detailsToPdf');
 
