@@ -39,7 +39,7 @@
 <body class="fixed-header ">
 @if(!isset($bol))
 	@include('forms.Menu')
-  @include('forms.Alerta')
+  
   @include('forms.Error')
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
@@ -265,8 +265,10 @@
           <div class="container-fluid container-fixed-lg">
             <!-- BEGIN PlACE PAGE CONTENT HERE -->
             @include('forms.Error')
+            @include('forms.Alerta')
             @endif
             @yield('body')
+
             <!-- END PLACE PAGE CONTENT HERE -->
           </div>
           <!-- END CONTAINER FLUID -->
@@ -1561,9 +1563,13 @@
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="{{asset('styles/assets/js/scripts.js')}}" type="text/javascript"></script>
+
     <!-- END PAGE LEVEL JS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css">
 <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+
+<script type="text/javascript" src="{{asset('multiselect/js/bootstrap-multiselect.js')}}"></script>
+  <link rel="stylesheet" href="{{asset('multiselect/css/bootstrap-multiselect.css')}}" type="text/css"/>
 </body>
 </html>

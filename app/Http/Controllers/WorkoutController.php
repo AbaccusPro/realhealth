@@ -10,11 +10,12 @@ use App\Workout;
 use App\Cardio;
 use App\Training;
 use App\Diet;
+use Illuminate\Support\Facades\Redirect;
 
 class WorkoutController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['detailsToPdf']]);
     }
 
     public function index()
@@ -123,4 +124,49 @@ class WorkoutController extends Controller
         $pdf = \PDF::loadView('workout.pdf.details', compact('workout', 'bol'));
         return $pdf->stream('workout.report');
     }
+
+    public function sendPdf($Id){
+        
+        $id = base64_decode($Id);
+        $workout = Workout::find($id);
+        $email = $workout->user->email;
+        $name = $workout->user->first_name;
+        $file = $this->detailsToPdf2($Id);
+        //url('pdf/workout', $workout->id);
+        //app('App\Http\Controllers\WorkoutController')->detailsToPdf($Id);
+        //dd($file);
+
+        //envio de email
+        \Mail::send('emails.workout', [], function($message) use ($name, $email, $file)
+       {
+           //remitente
+           $message->from(env('MAIL_FROM'), env('MAIL_NAME'));
+ 
+           //asunto
+           $message->subject('your custom workout from realhealth');
+ 
+           //receptor
+           $message->to('mowex@hotmail.com', $name);
+
+           //archivo
+           $message->attach($file, ['as' => 'workout'.'.PDF']);
+       });
+
+        chmod(public_path().'/pdf/workout.report', 0777);
+        unlink(public_path().'/pdf/workout.report');
+
+        \Session::flash('message', 'Send Workout');
+        return redirect::back();
+    }
+
+///////////////////////////////////////////////////////
+    public function detailsToPdf2($Id){
+        $id = base64_decode($Id);
+        $workout = Workout::find($id);
+        $bol = true;
+        $pdf = \PDF::loadView('workout.pdf.details', compact('workout', 'bol'));
+        $pdf->save(public_path().'/pdf/workout.report');
+        return public_path().'/pdf/workout.report';
+    }
+
 }

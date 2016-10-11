@@ -37,7 +37,7 @@ $(document).ready(function() {
 			             <td>{{$usuario->rol->Rol}}</td>
 			             <!--links a las rutas definidad con el parametro de id-->
 			             <td><a href="profile/user/{{base64_encode($usuario->id)}}" class="btn btn-success">Profile</a>
-			             <a href="edit/user/{{base64_encode($usuario->id)}}" class="btn btn-primary">Update</a>
+			             <a href="edit/user/{{base64_encode($usuario->id)}}" class="btn btn-primary">Edit</a>
 			             <a href="delete/user/{{base64_encode($usuario->id)}}" class="btn btn-danger">Delete</a>
 			             </td>
 

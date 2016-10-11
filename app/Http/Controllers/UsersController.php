@@ -8,6 +8,8 @@ use App\Http\Requests;
 use Illuminate\Support\Str;
 use App\User;
 use App\Rol;
+use App\Module;
+use App\NutM;
 
 class UsersController extends Controller
 {
@@ -28,7 +30,7 @@ class UsersController extends Controller
     {
         //el metodo pluck es para sutituir el metodo lists... la variable rol es un arreglo con toda la lista del modelo rol, esta variable sirve para llenar el combo d ela vista.
         $rol = Rol::pluck('Rol', 'id');
-        return view('users.register', compact('rol'));
+        return view('users.Register', compact('rol'));
     }
 
     public function store(Request $request)
@@ -100,12 +102,20 @@ class UsersController extends Controller
         $id = base64_decode($Id);
         $usuario = User::find($id);
         $rol = Rol::pluck('Rol', 'id');
-        return view('users.Edit', compact('usuario', 'rol'));
+        $modules = Module::all();
+        return view('users.Edit', compact('usuario', 'rol', 'modules'));
     }
 
     public function update(Request $request, $id)
     {
         // se localiza al usuario mediante el id y se hace la respectiva actualizacion con los datos enviados en el formulario
+        $modules = $request->input('module');
+        for ($i=0;$i<2;$i++) {
+            if (!isset($modules[$i])) {
+                $modules[$i] = 'off';
+            }
+        }
+        
         $user = User::find($id);
         $user->first_name = $request->input('first_name');
         $user->middle_name = $request->input('middle_name');
@@ -113,8 +123,31 @@ class UsersController extends Controller
         $user->email = $request->input('Email');
         $user->username = $request->input('Username');
         $user->rol_id = $request->input('Rol');
+        $user->modules()->detach();
+        for ($i=0;$i<2;$i++) {
+            if ($modules[$i] == 'off') {
+                //$user->modules()->detach($i+1);
+                switch ($i+1) {
+                     case 1:
+                         $user->nutrition = 0;
+                         break;
+                     case 2:
+                         $user->therapy = 0;
+                         break;
+                 } 
+            }else{
+                $user->modules()->attach($i+1);
+                switch ($i+1) {
+                     case 1:
+                         $user->nutrition = 1;
+                         break;
+                     case 2:
+                         $user->therapy = 1;
+                         break;
+                 }
+            }
+        }
         $user->save();
-
         \Session::flash('message', 'User updated successfully');
 
         return Redirect('users');

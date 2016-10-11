@@ -1,5 +1,13 @@
 @extends('layouts.Master')
-@section('title') Editar Usuario @stop
+@section('title') Edit User @stop
+
+@section('head')
+<script>
+	$(document).ready(function() {
+        $('#module').multiselect();
+    });
+</script>    
+@stop
 
 @section('body')
 <div class="container">
@@ -54,6 +62,27 @@
 								['class' => 'chosen-select form-control'])!!}
 							</div>
 						</div>
+
+						<h5>Modules</h5>
+						<div class="form-group">
+							@if ($usuario->nutrition == 1 || $usuario->therapy == 1)
+								@if ($usuario->nutrition == 1)
+									<label><input type="checkbox" name="module[0]" checked> Nutrition</label><br>						
+								@else
+									<label><input type="checkbox" name="module[0]"> Nutrition</label><br>
+								@endif
+								@if ($usuario->therapy == 1)
+									<label><input type="checkbox" name="module[1]" checked> Therapy</label><br>
+								@else
+									<label><input type="checkbox" name="module[1]"> Therapy</label><br>
+								@endif									
+							@else
+								@foreach ($modules as $key=>$module)
+									<label><input type="checkbox" name="module[{{$key}}]"> {{$module->Name}}</label><br>
+								@endforeach
+							@endif
+						</div>
+
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-success">

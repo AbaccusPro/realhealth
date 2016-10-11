@@ -68,6 +68,22 @@
               </li>
             </ul>
           </li>
+          @if (\Auth::user()->nutrition == 1)
+          <li class="">
+            <a href="{{ url('nutrition') }}" class="detailed">
+              <span class="title">Nutrition</span>
+            </a>
+            <span class="icon-thumbnail"><i class="pg-home"></i></span>
+          </li>
+          @endif
+          @if (\Auth::user()->therapy == 1)
+          <li class="">
+            <a href="{{ url('therapy') }}" class="detailed">
+              <span class="title">Therapy</span>
+            </a>
+            <span class="icon-thumbnail"><i class="pg-home"></i></span>
+          </li>
+          @endif
         </ul>
         <div class="clearfix"></div>
       </div>

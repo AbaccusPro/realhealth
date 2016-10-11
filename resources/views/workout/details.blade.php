@@ -123,6 +123,7 @@
 		<section class="row">
 			<br><br>
 			<a href="{{url('pdf/workout', base64_encode($workout->id))}}" class="btn btn-warning">View PDF</a>
+			<a href="{{url('send/workout', base64_encode($workout->id))}}" class="btn btn-primary">Send PDF</a>
 		</section>
 		@endif
 	</section>

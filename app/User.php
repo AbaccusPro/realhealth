@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'first_name', 'middle_name', 'last_name', 'email', 'password', 'rol_id', 'image_user_id', 'username',
+        'first_name', 'middle_name', 'last_name', 'email', 'password', 'rol_id', 'image_user_id', 'username', 'nutrition', 'therapy'
     ];
 
     protected $hidden = [
@@ -27,5 +27,13 @@ class User extends Authenticatable
 
     public function workouts(){
     	return $this->hasMany('App\Workout', 'User_id');
+    }
+
+    public function modules(){
+        return $this->belongsToMany('App\Module', 'user_has_module', 'User_id', 'Module_id');
+    }
+
+    public function modN(){
+        return $this->belongsTo('App\NutM', 'module_id');
     }
 }
