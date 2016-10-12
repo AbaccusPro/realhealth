@@ -146,7 +146,7 @@ class WorkoutController extends Controller
            $message->subject('your custom workout from realhealth');
  
            //receptor
-           $message->to('mowex@hotmail.com', $name);
+           $message->to($email, $name);
 
            //archivo
            $message->attach($file, ['as' => 'workout'.'.PDF']);

@@ -48,6 +48,12 @@
 						</div>
 
 						<div class="form-group">
+						{!!Form::label('Imagen', 'Imagen de Perfil',
+							 ['class' => 'col-sm-4'])!!}
+						{!!Form::file('image', null, ['id' => 'image'])!!}
+						</div>
+
+						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-success">
 									Registrar

@@ -1570,6 +1570,6 @@
 <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
 
 <script type="text/javascript" src="{{asset('multiselect/js/bootstrap-multiselect.js')}}"></script>
-  <link rel="stylesheet" href="{{asset('multiselect/css/bootstrap-multiselect.css')}}" type="text/css"/>
+  <link rel="stylesheet" href="{{asset('multiselect/css/bootstrap-multiselect.css')}}" type="text/css"/> 
 </body>
 </html>

@@ -4,9 +4,9 @@
 @section('head')
 <script>
 	$(document).ready(function() {
-        $('#module').multiselect();
+        $("[name='module']").bootstrapSwitch();
     });
-</script>    
+</script>   
 @stop
 
 @section('body')
@@ -63,22 +63,30 @@
 							</div>
 						</div>
 
+						<div class="form-group">
+						{!!Form::label('Imagen', 'Imagen de Perfil',
+							 ['class' => 'col-sm-4'])!!}
+							 <div class="col-sm-8">
+							 <img src="data:image/$usuario->image->Mime;base64,{{chunk_split(base64_encode($usuario->image->File))}}"  width="15%" />
+						{!!Form::file('image', null, ['id' => 'image', 'class' => 'chosen-select form-control'])!!}
+							</div>
+
 						<h5>Modules</h5>
 						<div class="form-group">
 							@if ($usuario->nutrition == 1 || $usuario->therapy == 1)
 								@if ($usuario->nutrition == 1)
-									<label><input type="checkbox" name="module[0]" checked> Nutrition</label><br>						
+									<label><input type="checkbox" name="module[0]" checked data-init-plugin="switchery" data-size="small" data-color="primary"> Nutrition</label><br>						
 								@else
-									<label><input type="checkbox" name="module[0]"> Nutrition</label><br>
+									<label><input type="checkbox" name="module[0]" data-init-plugin="switchery" data-size="small" data-color="primary"> Nutrition</label><br>
 								@endif
 								@if ($usuario->therapy == 1)
-									<label><input type="checkbox" name="module[1]" checked> Therapy</label><br>
+									<label><input type="checkbox" name="module[1]" checked data-init-plugin="switchery" data-size="small" data-color="primary"> Therapy</label><br>
 								@else
-									<label><input type="checkbox" name="module[1]"> Therapy</label><br>
+									<label><input type="checkbox" name="module[1]" data-init-plugin="switchery" data-size="small" data-color="primary"> Therapy</label><br>
 								@endif									
 							@else
 								@foreach ($modules as $key=>$module)
-									<label><input type="checkbox" name="module[{{$key}}]"> {{$module->Name}}</label><br>
+									<label><input type="checkbox" name="module[{{$key}}]" data-init-plugin="switchery" data-size="small" data-color="primary"> {{$module->Name}}</label><br>
 								@endforeach
 							@endif
 						</div>
