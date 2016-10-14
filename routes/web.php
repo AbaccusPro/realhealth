@@ -49,3 +49,13 @@ Route::group(['middleware' => ['auth', 'mod']], function () {
 Route::group(['middleware' => ['auth', 'ther']], function () {
 	Route::get('therapy', 'NutritionController@therapy');   
 });
+
+Route::get('payment', [ 
+	'as' => 'payment',
+	'uses' => 'PaypalController@postPayment',
+]);
+ 
+Route::get('payment/status', [
+	'as' => 'payment.status',
+	'uses' => 'PaypalController@getPaymentStatus',
+]);
