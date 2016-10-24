@@ -223,13 +223,13 @@
             <div class="dropdown pull-right">
               <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="thumbnail-wrapper d32 circular inline m-t-5">
-                <img src="{{asset('styles/assets/img/profiles/avatar.jpg')}}" alt="" data-src="{{asset('styles/assets/img/profiles/avatar.jpg')}}" data-src-retina="{{asset('styles/assets/img/profiles/avatar_small2x.jpg')}}" width="32" height="32">
+                <img src="data:image/Auth::user()->image->Mime;base64,{{chunk_split(base64_encode(Auth::user()->image->File))}}" alt="" data-src="data:image/Auth::user()->image->Mime;base64,{{chunk_split(base64_encode(Auth::user()->image->File))}}" data-src-retina="data:image/Auth::user()->image->Mime;base64,{{chunk_split(base64_encode(Auth::user()->image->File))}}" width="32" height="32">
             </span>
               </button>
               <ul class="dropdown-menu profile-dropdown" role="menu">
-                <li><a href="#"><i class="pg-settings_small"></i> Settings</a>
+                <li><a href="#"><i class="pg-settings_small"></i> Profile</a>
                 </li>
-                <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+                <li><a href="{{ url('expedient', [base64_encode(Auth::user()->id)]) }}"><i class="pg-outdent"></i> Expedient</a>
                 </li>
                 <li><a href="#"><i class="pg-signals"></i> Help</a>
                 </li>

@@ -136,5 +136,10 @@ class PaypalController extends Controller
 			->with('message', 'La compra fue cancelada');
 	}
 
+	public function pay(){
+
+		return view('payment.pay');
+	}
+
 
 }

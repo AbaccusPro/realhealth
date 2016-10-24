@@ -79,6 +79,20 @@ return [
             'strict' => true,
             'engine' => null,
         ],
+///////////// expediente
+        'exp' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST3', 'localhost'),
+            'port' => env('DB_PORT3', '3306'),
+            'database' => env('DB_DATABASE3', 'forge'),
+            'username' => env('DB_USERNAME3', 'forge'),
+            'password' => env('DB_PASSWORD3', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',

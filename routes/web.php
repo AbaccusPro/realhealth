@@ -50,6 +50,9 @@ Route::group(['middleware' => ['auth', 'ther']], function () {
 	Route::get('therapy', 'NutritionController@therapy');   
 });
 
+//////////////////Pagos//////////////////
+Route::get('pay', 'PaypalController@pay');
+
 Route::get('payment', [ 
 	'as' => 'payment',
 	'uses' => 'PaypalController@postPayment',
@@ -59,3 +62,7 @@ Route::get('payment/status', [
 	'as' => 'payment.status',
 	'uses' => 'PaypalController@getPaymentStatus',
 ]);
+
+///////////////////expediente////////////////
+Route::get('expedient/{id}', 'ExpedientController@expedient');
+Route::post('expedient/{id}', 'ExpedientController@storeExpedient');
