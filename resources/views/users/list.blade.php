@@ -32,7 +32,11 @@ $(document).ready(function() {
 			    <!--se recorre la variable que viene del controlador y se imprimen los datos-->
 			     @foreach($usuarios as $usuario)
 			           <tr class="odd gradeX">
-			             <td>{{$usuario->username}}</td>
+			           	@if ($usuario->information != null)
+			           		<td><a href="{{ url('expedient', [base64_encode($usuario->id)]) }}">{{$usuario->username}}</a></td>
+			           	@else
+			           	<td>{{$usuario->username}}</td>
+			           	@endif			             
 			             <td>{{$usuario->email}}</td>
 			             <td>{{$usuario->rol->Rol}}</td>
 			             <!--links a las rutas definidad con el parametro de id-->

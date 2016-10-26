@@ -110,7 +110,7 @@ $(document).on('ready', function(){
 
 			<section class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="seccion1">
-					{!!Form::open(['url' => ['expedient', Auth::user()->id],'files' => true, 'method' => 'POST'])!!}
+					{!!Form::model($user, ['url' => ['update/expedient', $user->id],'files' => true, 'method' => 'POST'])!!}
 					
 					@include('users.history.partials.information') <!-- Aqui el include es para colocar la parte del formulario que esta incluido en la ruta forms/secciones/evento en la parte de as vistas del framework-->
 				</div>
@@ -139,7 +139,7 @@ $(document).on('ready', function(){
 					@include('users.history.partials.diet')
 					<div class="row">
 							<div class="col-md-6 col-md-offset-5">
-								<br>{!!Form::submit('Save Expedient', ['class' => 'btn btn-warning', 'id' => 'enviar'])!!}		
+								<br>{!!Form::submit('Update', ['class' => 'btn btn-warning', 'id' => 'enviar'])!!}		
 							</div>
 						</div>	
 					<br>

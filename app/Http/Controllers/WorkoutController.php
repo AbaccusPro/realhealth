@@ -52,7 +52,7 @@ class WorkoutController extends Controller
             'user_id'       => $id,
             ]);
 
-        //los campos que se van creando dinamicamente de acuerdo a la necesidad del usuario deben recorrerse para poder guardarse todos. primero se cuenta el numero de elementos de el primero campo con el metodo coun($data['excercise']) y luego en base a ese conteo se recorre el arreglo y se van guardando los campos con la relacion al modelo workout creado en la parte de arriba
+        //los campos que se van creando dinamicamente de acuerdo a la necesidad del usuario deben recorrerse para poder guardarse todos. primero se cuenta el numero de elementos de el primero campo con el metodo count($data['excercise']) y luego en base a ese conteo se recorre el arreglo y se van guardando los campos con la relacion al modelo workout creado en la parte de arriba
         for ($i=0; $i < count($data['Excercise']) ; $i++) { 
             $cardio = Cardio::create([
                 'Excercise'     => $data['Excercise'][$i],

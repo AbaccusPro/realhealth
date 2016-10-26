@@ -66,3 +66,5 @@ Route::get('payment/status', [
 ///////////////////expediente////////////////
 Route::get('expedient/{id}', 'ExpedientController@expedient');
 Route::post('expedient/{id}', 'ExpedientController@storeExpedient');
+Route::post('update/expedient/{id}', 'ExpedientController@storeExpedient');
+//Route::get('history/{id}', 'ExpedientController@expedient');

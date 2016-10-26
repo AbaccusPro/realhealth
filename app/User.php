@@ -36,7 +36,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\NutM', 'module_id');
     }
 
-    public function Informtaion(){
-        return $this->belongsTo('App\Information','Information_id');
+    public function information(){
+        return $this->hasOne('App\Information','User_id');
     }
 }

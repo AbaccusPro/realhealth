@@ -11,7 +11,8 @@
          "guzzlehttp/guzzle": "~5.3|~6.0",
         "barryvdh/laravel-snappy": "^0.3.1",
         "barryvdh/laravel-dompdf": "^0.7.0",
-        "paypal/rest-api-sdk-php": "^1.8"
+        "paypal/rest-api-sdk-php": "^1.8",
+        "iatstuti/laravel-nullable-fields": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

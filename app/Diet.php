@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Diet extends Model
 {
+	protected $connection = 'fit';
     public $timestamps = false;
     protected $table = 'Diet';
 

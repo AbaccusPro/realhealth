@@ -13,10 +13,10 @@ class History extends Model
     protected $fillable = ['Back_trouble','Neck_trouble','Joint_injury','Carpal_tunnel','Bleeding','Enlarged_glands','Rashes','Unexplained_lumps','Chronic_fatigue','Night_sweats','Undesired_weight_loss','Snoring','Difficulty_sleeping','Low_blood_sugar','Goal_id'];
 
     public function goal(){
-    	return $this->hasOne('App\Goal', 'History_id');
+    	return $this->belongsTo('App\Goal', 'Goal_id');
     }
 
     public function aditional(){
-    	return $this->belongsTo('App\Aditional', 'Aditional_questions_id');
+    	return $this->hasOne('App\Aditional', 'History_id');
     }
 }

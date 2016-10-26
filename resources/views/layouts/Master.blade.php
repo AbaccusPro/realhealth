@@ -40,7 +40,6 @@
 @if(!isset($bol))
 	@include('forms.Menu')
   
-  @include('forms.Error')
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
       <!-- START HEADER -->

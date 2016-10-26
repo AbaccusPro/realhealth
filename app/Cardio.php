@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cardio extends Model
 {
+	protected $connection = 'fit';
     public $timestamps = false; //timestamps a false para no guardar fecha de guardado
     protected $table = 'Cardio'; //hace referencia ala tabla Cardio
 

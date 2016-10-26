@@ -18,6 +18,6 @@ class Information extends Model
 
 ////////////////////////////////7
     public function body(){
-    	return $this->belongsTo('App\Body', 'Body_Composition_id');
+    	return $this->hasOne('App\Body', 'Basic_information_id');
     }
 }
