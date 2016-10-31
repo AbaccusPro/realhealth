@@ -1,3 +1,4 @@
+<!-- codigo para mostrar los errores... esto si es que existen -->
 @if($errors->any())
 		<div class="alert alert-danger alert-dismissable" id = "msj-error" role="alert" >
 			<p>Correct the mistakes:</p>

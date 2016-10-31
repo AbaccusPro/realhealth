@@ -12,6 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        'login'
+        'login'// aqui se especifica la ruta que necesitamos que no ejecute el middleware de VerifyCsrfToken
     ];
 }

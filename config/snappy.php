@@ -2,7 +2,7 @@
 
 return array(
 
-
+//configuración del whktmltopdf es necesario especificar la ruta de instalación, sobre todo cuando se hace el cambio de windows a linux
     'pdf' => array(
         'enabled' => true,
         'binary'  => //'C:\wkhtmltopdf\bin\wkhtmltopdf',

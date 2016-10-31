@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        //en esta sección se dan de alta los middleware.. aqui por ejemlplo yo di de alta los ultimos dos para las restricciones de los modulos
         'mod' => \App\Http\Middleware\Module::class,
         'ther' => \App\Http\Middleware\Mtherapy::class,
     ];

@@ -73,6 +73,7 @@
 
 						<div class="form-group" style="margin-left: 30px">
 						<h5>Modules</h5>
+						<!-- esta evaluación es para ver si tienen habilitado el modulo y de ser asi es la manera en que se mostraran los checkbox -->
 							@if ($usuario->nutrition == 1 || $usuario->therapy == 1)
 								@if ($usuario->nutrition == 1)
 									<label><input type="checkbox" name="module[0]" checked data-init-plugin="switchery" data-size="small" data-color="primary"> Nutrition</label><br>						

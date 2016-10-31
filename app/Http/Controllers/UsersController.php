@@ -38,9 +38,9 @@ class UsersController extends Controller
     {
         //logica de creacion de usuario es la misma logica que se usa en el proyecto de electoral de dropbox
 
-        $image = new ImageUser();
+        $image = new ImageUser();// se crea el objeto de la imagen
 
-        $file = $request->file('image');
+        $file = $request->file('image'); //se toma el archivo del formulario
 
         //hace la evaluacion para corroborar que el archivo exista
         if($file != null){
@@ -52,7 +52,7 @@ class UsersController extends Controller
 
         }
 
-        //una vezestando el archivo en la ruta publica se habre el archivo con el metodo php fopen, se reccorre y se cierra, basicamente este pedazo de codigo es el que hace la magia para convertir el archivo a binario
+        //una vez estando el archivo en la ruta publica se habre el archivo con el metodo php fopen, se reccorre y se cierra, basicamente este pedazo de codigo es el que hace la magia para convertir el archivo a binario
         $imagen = public_path().'/images/'.$nombre;
         $fp = fopen($imagen, 'r');
         if($fp){
@@ -68,15 +68,19 @@ class UsersController extends Controller
         $image->save();
         $image_id = $image->id;
 
-        //varaibles a utilizar
+        //varaibles a utilizar para la creacion del usuario
+
         $rol = Rol::pluck('Rol', 'id');
+        //esta de aqui genera el password de 8 digitos en base a los caracteres asignados
         $pass = Str::random(8, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890");
+
         $nombres = $request->input('first_name');
         $paterno = $request->input('middle_name');
         $materno = $request->input('last_name');
+        //la funcion explode separa cadenas en base a un argumento, en este caso cada que haya un espacio " "
         $frac = explode(" ", $materno);
-        $finAp = array_pop($frac);        
-        $username = $nombres[0].$paterno.$finAp[0];
+        $finAp = array_pop($frac);// con esta linea obtenemos el ultimo elemento del apellido
+        $username = $nombres[0].$paterno.$finAp[0];// se arma la cadena que sera el username del usuario
         
         //se crea el usuario
         $user  = User::create([
@@ -103,6 +107,16 @@ class UsersController extends Controller
         ];
 
         //envio de email
+        /*
+        
+        \Mail::send('emails.NewPass', $data, function($message) use ($ToName, $ToMail)
+        donde:
+        emails.newPass = la vista que se va a enviar en el cuerpo del correo
+        $data = el arreglo con las variables que se envian a la vista del correo (en este caso username y pass)
+        function($message) = la funcion que va a aejcutar la accion
+        use ($ToName, $ToMail) = son las vriables que estaran a la alcance del metodo, es decir si no se declaran ahi entonces no entraran al metodo Mail y no se podrán utilizar.
+        */
+
         \Mail::send('emails.NewPass', $data, function($message) use ($ToName, $ToMail)
        {
            //remitente
@@ -115,6 +129,7 @@ class UsersController extends Controller
            $message->to($ToMail, $ToName);            
        });
 
+        //se borra la imagen del usuario que se guardo momentaneamente en la carpeta publica del proyecto
         chmod(public_path().'/images/'.$nombre, 0777);
         unlink(public_path().'/images/'.$nombre);
 

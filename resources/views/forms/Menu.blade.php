@@ -1,9 +1,15 @@
+<!--Este es el menu que vendría siendo el sidebar de la izquierda -->
 <!-- BEGIN SIDEBPANEL-->
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
       <div class="sidebar-overlay-slide from-top" id="appMenu">
         <div class="row">
           <div class="col-xs-6 no-padding">
+          {{--
+          existen muchos helpers que facilitan las referencias en laravel.. el helper asset hacer referencia ala carpeta publica del proyecto por lo que en la linea de codigo:
+          {{asset('styles/assets/img/demo/social_app.svg')}}
+          esta diciendo que en la carpeta publica del proyecto se siga la siguente ruta: styles/assets/img/demo/social_app.svg para encontrar la imagen y mostrarla
+           --}}
             <a href="#" class="p-l-40"><img src="{{asset('styles/assets/img/demo/social_app.svg')}}" alt="socail">
             </a>
           </div>

@@ -32,6 +32,7 @@ $(document).ready(function() {
 			    <!--se recorre la variable que viene del controlador y se imprimen los datos-->
 			     @foreach($usuarios as $usuario)
 			           <tr class="odd gradeX">
+			           <!-- evaluacion para poder determinar si se muestra la liga del susuario al expediente si es que ya tiene algo almacenado en el mismo -->
 			           	@if ($usuario->information != null)
 			           		<td><a href="{{ url('expedient', [base64_encode($usuario->id)]) }}">{{$usuario->username}}</a></td>
 			           	@else

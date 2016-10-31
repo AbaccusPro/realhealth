@@ -66,6 +66,12 @@ return [
             'engine' => null,
         ],
 
+        /*las conexiones se definen aqui... la default es la que se denomina mysql... las que se van creando despues pueden tener el nombre se más convenga al programador... en este caso yo hice tres conexiones:
+        nutrition = base de datos de prueba para el modulo de nutricion
+        exp = base de datos que contiene los datos del expediente clinico
+        fit = base de datos del modulo de fitness (james)
+        */
+////////// nutricion
         'nutrition' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST2', 'localhost'),

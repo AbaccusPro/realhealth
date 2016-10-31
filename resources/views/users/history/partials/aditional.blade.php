@@ -1,7 +1,9 @@
 <h1>Aditional Questions</h1>
  <h5>Questions honestly</h5>
+<!--Esta evaluacion sirve para saber si el usuario ya tiene datos guardados en su expediente o si aun no ha guardado nada -->
+ @if (!isset($user)) <!--si la variable usuario no esta definida entonces el usuario tendra todo el formulario vacio, listo para ser llenado
 
- @if (!isset($user))
+ esta evaluacion se realiza en todas las secciones del formulario para poder determinar si se van a llenar los campos o simplemente se mostrar el formulario para almacenarlo por primera vez -->
 	<section class="col-md-6">
 
 		<div class="form-group">
@@ -75,10 +77,16 @@
 	
 	</section>
  @else
+ <!--si la variable esta definida significa que entonces ya tiene algunos campos guardados en su expediente y se procede al llenado de dichos campos para que se respeten y se visualicen los datos que ya estan almacenados -->
 	<section class="col-md-6">
 
 		<div class="form-group">
 			<label>Are you experiencing any stresses, mood problems, relationship difficulties, or substance-related problems for which you would like resource or referral information on a confidential basis? </label>
+			<!--con la linea de codigo:
+			$user->information->body->goal->history->aditional->a0
+			se esta accediendo al campo correspondiente que el usuario tiene asignado en ese campo.
+			basicamente se llega al campo a través de las relaciones que estan especificadas en los modelos, de esta manera evitamos tener un query bastante grande y se accede de una manera muy amigable
+			esto lo hacemos para cada campo, ya que necesitamos mostrar todos para ver que es lo que tiene almacenado el usuario en su expediente -->
 			{!!Form::select('a0',['Yes' => 'Yes', 'No' => 'No'] ,$user->information->body->goal->history->aditional->a0, ['class' => 'form-control'])!!}	
 		</div>
 		

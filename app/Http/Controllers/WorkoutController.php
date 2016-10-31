@@ -90,9 +90,11 @@ class WorkoutController extends Controller
 
     public function show($Id)
     {
-        $id = base64_decode($Id);
-        $usuario = User::find($id);
-        $workouts = $usuario->workouts;
+        //metodo para mostrar los workouts(rutinas) del usuario
+        $id = base64_decode($Id);//se decodifica el id
+        $usuario = User::find($id);//se encuentra el usuario
+        $workouts = $usuario->workouts;//se localizan los workouts en base la relación
+        //se retorna la vista con los workouts del usuario
         return view('workout.workouts', compact('workouts'));
     }
 
@@ -112,29 +114,31 @@ class WorkoutController extends Controller
     }
 
     public function details($Id){
-        $id = base64_decode($Id);
-        $workout = Workout::find($id);
+        //funcion para encontrar el workout especifico y obtener los detalles
+        $id = base64_decode($Id);//se decodifica el id
+        $workout = Workout::find($id);//se encuentra el workout
+        //se retorna la vista con el workout especifico
         return view('workout.details', compact('workout'));
     }
 
     public function detailsToPdf($Id){
-        $id = base64_decode($Id);
-        $workout = Workout::find($id);
-        $bol = true;
+        //funcion para renderizar el pdf
+        $id = base64_decode($Id);//se decodifica el id
+        $workout = Workout::find($id);//se busca el workout con el id
+        $bol = true;//variable para renderizar solo parte de la vista
+        //se lee la vista workout/pdf/details con las variables antes definidas
         $pdf = \PDF::loadView('workout.pdf.details', compact('workout', 'bol'));
+        //se renderiza el pdf
         return $pdf->stream('workout.report');
     }
 
     public function sendPdf($Id){
-        
-        $id = base64_decode($Id);
-        $workout = Workout::find($id);
-        $email = $workout->user->email;
-        $name = $workout->user->first_name;
-        $file = $this->detailsToPdf2($Id);
-        //url('pdf/workout', $workout->id);
-        //app('App\Http\Controllers\WorkoutController')->detailsToPdf($Id);
-        //dd($file);
+        //funcion para enviar el pdf
+        $id = base64_decode($Id);//se decodifica el id recibido a través de la url
+        $workout = Workout::find($id); //se encuentra el pdf
+        $email = $workout->user->email;// se localiza el email del usuario que es al que se mandara el pdf
+        $name = $workout->user->first_name; //se localiza el nombre del usuario al que pertenece la rutina
+        $file = $this->detailsToPdf2($Id);// se genera el pdf a través del metodo detailsToPdf2 creado en la parte final de este controlador.
 
         //envio de email
         \Mail::send('emails.workout', [], function($message) use ($name, $email, $file)
@@ -152,21 +156,29 @@ class WorkoutController extends Controller
            $message->attach($file, ['as' => 'workout'.'.PDF']);
        });
 
-        chmod(public_path().'/pdf/workout.report', 0777);
-        unlink(public_path().'/pdf/workout.report');
+        //se borra el archivo pdf que se acaba de crear... con estas dos lineas de codigo
+        chmod(public_path().'/pdf/workout.PDF', 0777);
+        unlink(public_path().'/pdf/workout.PDF');
 
-        \Session::flash('message', 'Send Workout');
-        return redirect::back();
+        \Session::flash('message', 'Send Workout');//mensaje de confirmación
+        return redirect::back();//se redirecciona a la url anterior
     }
 
 ///////////////////////////////////////////////////////
     public function detailsToPdf2($Id){
-        $id = base64_decode($Id);
-        $workout = Workout::find($id);
-        $bol = true;
-        $pdf = \PDF::loadView('workout.pdf.details', compact('workout', 'bol'));
-        $pdf->save(public_path().'/pdf/workout.report');
-        return public_path().'/pdf/workout.report';
+        //funcion para guardar temporalmente el pdf
+        $id = base64_decode($Id);// se decodifica el id
+        $workout = Workout::find($id);//se busca el workout
+        $bol = true;//variable para renderizar solo lo necesario para el pdf
+        $pdf = \PDF::loadView('workout.pdf.details', compact('workout', 'bol'));//se renderiza la vista que deseamos mandar como pdf
+
+        if(file_exists(public_path().'/pdf/workout.PDF')) {//si ya existe el archivo se elimina
+          chmod(public_path().'/pdf/workout.PDF', 0777);
+          unlink(public_path().'/pdf/workout.PDF');
+        }
+
+        $pdf->save(public_path().'/pdf/workout.PDF');//se guarda temporalmente el pdf en la carpeta public/pdf/workout.pdf
+        return public_path().'/pdf/workout.PDF'; //se retorna el pdf que recien fue guardado
     }
 
 }

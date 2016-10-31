@@ -8,12 +8,15 @@ class ExpedientCreateRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        return true;//se debe poner a true para que la validacion se efectue sin problemas
     }
 
     public function rules()
     {
         return [
+            //se especifican los campos y sus respectivas reglas... los campos deben coincidir con los nombres que se le dieron en el formulario...
+            //existen muchas reglas predefinidas en las validaciones de laravel las cuales estan disponibles en la documentación del framework.. no obstante si se necesita especificar alguna regla especifica se pede hacer de la manera siguiente:
+            //['required', 'regex:/^[.áéíóúÁÉÍÓÚ\pL\s]+$/u'], en esta regla especificamos que el campo es requerido y dentro de este puede haber una cadena con letras acentuadas, puntos y espacios en blanco... cualquier otro caracter no especificado mandará un error.
             'Name'              => ['required', 'regex:/^[.áéíóúÁÉÍÓÚ\pL\s]+$/u'],
             'Gender'            => 'required|alpha',
             'Age'               => 'required|numeric',

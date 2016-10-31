@@ -54,7 +54,7 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
+    //estas variables tambien estan definidas en el archivo .env de la aplicación, no obstante pueden ponerse los datos de direccion y nombre directamente, es cuestion del programador el como lo hace..
     'from' => [
         'address' => env('MAIL_FROM'),
         'name' => env('MAIL_NAME'),
@@ -83,7 +83,7 @@ return [
     | connection. You may also set the "password" value below this one.
     |
     */
-
+    //variable definida en el archivo .env de la aplicación
     'username' => env('MAIL_USERNAME'),
 
     /*
@@ -96,7 +96,7 @@ return [
     | connection so that the application will be able to send messages.
     |
     */
-
+    //variable definida en el archivo .env de la aplicación
     'password' => env('MAIL_PASSWORD'),
 
     /*

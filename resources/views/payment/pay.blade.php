@@ -1,7 +1,8 @@
 @extends('layouts.Master')
+<!--La mayoria de vistas extienden de la vista maestra que es donde se encuentra toda la estructura de clases con los debidos estilos de la plantilla -->
 
-@section('title') Payment @stop
-
+@section('title') Payment @stop <!--secciones que se pueden agregar debidamente definidas en la plantilla maestra -->
+<!-- Vista de pago -->
 @section('body')
 <section class="container">
 	<section class="row col-md-6">

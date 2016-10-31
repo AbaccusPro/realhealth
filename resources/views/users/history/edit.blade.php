@@ -33,69 +33,7 @@ $(document).on('ready', function(){
         $('[href="' + lastTab + '"]').tab('show');
     }
 	});
-
-////////////////////////////////////////////////////////////////////
-
-//funcion para obtener las relaciones de cada combo mediante la peticion ajax
-	 $('#Asunto').on("change", function(e){ //cuando cambie
-	 	//va hacia la ruta tipos, que esta vinculada a un metodo del controlador ajaz
-        $.get("{{ url('tipos')}}",{ option: $(this).val() }, function(data) {
-            //vacia los campos antes de cambiarlos
-            $('#Tipos').empty();
-            $('#Subeventos').empty();
-            //recorre los datos obtenidos y los va acomodando en la opcion de los combos
-            $.each(data.tipos, function(key, element) {
-                $('#Tipos').append("<option value='" + key + "'>" + element + "</option>");
-                 var ruta = $('#Tipos').val();
-            });
-
-            $.each(data.sube, function(key, element) {
-                $('#Subeventos').append("<option value='" + key + "'>" + element + "</option>");
-                 var ruta = $('#Subeventos').val();
-            });
-        });
-    });
-
-	 $('#Tipos').on("change", function(e){
-        $.get("{{ url('subeventos')}}",{ option: $(this).val() }, function(data) {
-            $('#Subeventos').empty();
-            $.each(data, function(key, element) {
-                $('#Subeventos').append("<option value='" + key + "'>" + element + "</option>");
-                 var ruta = $('#Subeventos').val();
-            });
-        });
-    });
-
-
-	 /////////////////////////////////////////////////////////////////////
-
-	 $('#Delegacion').on("change", function(e){
-        $.get("{{ url('municipios')}}",{ option: $(this).val() }, function(data) {
-            $('#Municipio').empty();
-            $('#Localidad').empty();
-            $.each(data.municipios, function(key, element) {
-                $('#Municipio').append("<option value='" + key + "'>" + element + "</option>");
-                 var ruta = $('#Municpio').val();
-            });
-
-            $.each(data.localidades, function(key, element) {
-                $('#Localidad').append("<option value='" + key + "'>" + element + "</option>");
-                 var ruta = $('#Localidad').val();
-            });
-        });
-    });
-
-	 $('#Municipio').on("change", function(e){
-        $.get("{{ url('localidades')}}",{ option: $(this).val() }, function(data) {
-            $('#Localidad').empty();
-            $.each(data, function(key, element) {
-                $('#Localidad').append("<option value='" + key + "'>" + element + "</option>");
-                 var ruta = $('#Localidad').val();
-            });
-        });
-    });
-
-
+	
 });
 
 </script>
